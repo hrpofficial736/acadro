@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-const PricingCard = ({ amount, featuresList }: { amount: number; featuresList: string[]}) => {
+const PricingCard = () => {
   return (
     <div className="pricing-card">
       
