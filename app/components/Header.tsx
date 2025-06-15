@@ -2,6 +2,7 @@
 
 import { motion } from "motion/react";
 import { PrimaryButton } from "@/components/buttons/PrimaryButton";
+import { redirect } from "next/navigation";
 
 export default function Header() {
   return (
@@ -28,7 +29,9 @@ export default function Header() {
         Create sessions, share notes, hold video calls, and manage students with
         ease.
       </h6>
-      <PrimaryButton text="Get started" onPressed={() => {}} />
+      <PrimaryButton text="Get started" onPressed={() => {
+        redirect("/sign-in")
+      }} />
       <div className="mockup"></div>
       
     </motion.section>

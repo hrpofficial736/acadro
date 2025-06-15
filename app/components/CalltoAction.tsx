@@ -1,6 +1,7 @@
 "use client";
 
 import { PrimaryButton } from "@/components/buttons/PrimaryButton";
+import { redirect } from "next/navigation";
 import React from "react";
 import { IoIosRocket } from "react-icons/io";
 
@@ -20,7 +21,9 @@ const CalltoAction = () => {
         text={"Get started for free"}
         icon={<IoIosRocket />}
         textFirst={true}
-        onPressed={() => {}}
+        onPressed={() => {
+          redirect("/sign-in")
+        }}
       />
     </div>
   );

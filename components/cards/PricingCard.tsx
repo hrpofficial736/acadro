@@ -5,6 +5,7 @@ import { Success } from "../icons/Success";
 import { PrimaryButton } from "../buttons/PrimaryButton";
 import { IoIosRocket } from "react-icons/io";
 import { MdOutlineWorkspacePremium } from "react-icons/md";
+import { redirect } from "next/navigation";
 
 const PricingCard = ({
   amount,
@@ -53,7 +54,10 @@ const PricingCard = ({
         text={`${isFree ? "Get started for Free" : "Upgrade to Premium"}`}
         icon={isFree ? <IoIosRocket /> : <MdOutlineWorkspacePremium />}
         textFirst={false}
-        onPressed={() => {}}
+        className="hover:bg-primary/80"
+        onPressed={() => {
+          redirect("/sign-in")
+        }}
       />
     </div>
   );

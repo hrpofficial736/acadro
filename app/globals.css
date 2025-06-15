@@ -35,7 +35,7 @@
 
 @layer components {
   .primary-btn {
-    @apply rounded-xl px-3 py-2 bg-radial from-primary to-primary/60 text-primaryText active:transform active:scale-90 transition-all text-base font-bold cursor-pointer hover:bg-primary/80 duration-300 f-c-row;
+    @apply rounded-xl px-3 py-2 bg-radial from-primary to-primary/60 text-primaryText active:transform active:scale-90 transition-all text-base font-bold cursor-pointer duration-300 f-c-row;
   }
   .sec-btn {
     @apply rounded-xl px-3 py-2 bg-radial from-primaryText to-primaryText/60 text-background text-sm font-bold cursor-pointer hover:bg-primaryText/80 transition-colors duration-300 f-c-row;
@@ -69,5 +69,8 @@
   }
   .footer {
     @apply w-full min-h-[300px] p-7 md:px-16 md:pt-16 pb-3 rounded-2xl bg-surface/50 f-c-col gap-20;
+  }
+  .input {
+    @apply px-3 py-2 bg-gradient-to-b from-background to-white/10 appearance-none text-primaryText/90 focus:outline-none border border-white/30 focus:border-secondaryText focus:shadow-sm shadow-secondaryText active:scale-[0.98] transition-transform duration-300 rounded-lg;
   }
 }

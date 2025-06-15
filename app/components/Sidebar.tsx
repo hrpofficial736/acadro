@@ -9,6 +9,7 @@ import Link from "next/link";
 import "@/app/globals.css";
 import { FaAngleRight } from "react-icons/fa";
 import { PrimaryButton } from "@/components/buttons/PrimaryButton";
+import { redirect } from "next/navigation";
 
 export default function Sidebar () {
   const { sideBarOpen, setSideBarOpen } = useSideBarStore();
@@ -63,7 +64,9 @@ export default function Sidebar () {
               text="Get started"
               icon={<FaAngleRight />}
               textFirst
-              onPressed={() => {}}
+              onPressed={() => {
+                redirect("/sign-in")
+              }}
             />
           </motion.div>
         )}
