@@ -1,3 +1,6 @@
+"use client";
+
+
 import HowItWorksCard from "@/components/cards/HowItWorksCard";
 import { Arrow } from "@/components/icons/Arrow";
 import { Grow } from "@/components/icons/Grow";
@@ -8,9 +11,16 @@ import { Success } from "@/components/icons/Success";
 import { Tasks } from "@/components/icons/Tasks";
 import { WpfVideoCall } from "@/components/icons/WpfVideoCall";
 import SegmentedProgress from "@/components/SegmentedProgress";
+import useIsMobile from "@/hooks/useIsMobile";
 import * as motion from "motion/react-client";
+import { useRef } from "react";
 
 export default function HowItWorks() {
+  const { isMobile, mounted } = useIsMobile();
+
+  const ref = useRef<HTMLDivElement | null>(null);
+
+  if (!mounted) return null;
   return (
     <motion.div
       initial={{
@@ -34,13 +44,13 @@ export default function HowItWorks() {
         </p>
       </div>
 
-      <div className="f-c-col relative">
-        <SegmentedProgress dimension={1000} />
+      <div ref={ref} className="f-c-col relative">
+        <SegmentedProgress parentRef={ref} />
 
-        <div className="f-c-col md:flex-row md:justify-center md:items-center gap-10 z-10 p-4">
+        <div className="f-c-col md:flex-row md:justify-center md:items-center gap-10 z-10">
           <HowItWorksCard
             icon={<MdiGoogleClassroom className="size-24" />}
-            delay={1}
+            delay={isMobile ? 2 : 1}
             title="Create a Classroom"
             description="Start by creating a classroom — like a group chat for your students."
           />
@@ -52,7 +62,7 @@ export default function HowItWorks() {
                 <Tasks className="size-20" />
               </div>
             }
-            delay={3}
+            delay={isMobile ? 4.5 : 3.5}
             title="Add Content & Sessions"
             description="Schedule live sessions, upload notes, and assign tasks."
           />
@@ -64,13 +74,13 @@ export default function HowItWorks() {
                 <Success className="size-20" />
               </div>
             }
-            delay={5.2}
+            delay={isMobile ? 7 : 6}
             title="Students Pay & join"
             description="Students pay using secure checkout and join your class."
           />
           <HowItWorksCard
             icon={<Grow className="size-20" />}
-            delay={7.5}
+            delay={isMobile ? 9.5 : 8.5}
             title="Track & Grow"
             description="Track student activity and grow your teaching business."
           />

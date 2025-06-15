@@ -14,7 +14,7 @@ export const PrimaryButton: React.FC<ButtonInterface> = ({
       onClick={() => {
         onPressed();
       }}
-      className={`primary-btn ${textFirst ? "flex-row-reverse" : "flex-row"} gap-3`}
+      className={`primary-btn ${textFirst ? "flex-row-reverse" : "flex-row"} gap-3 z-30`}
     >
       {icon}
       {text}
