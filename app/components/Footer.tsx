@@ -41,7 +41,7 @@ const Footer = () => {
             About Us
           </Link>
           <Link href={"/"} className="hover:underline text-secondaryText text-xs md:text-base">
-            What's New
+            What&apos; s New
           </Link>
           <Link href={"/"} className="hover:underline text-secondaryText text-xs md:text-base">
             Contact
