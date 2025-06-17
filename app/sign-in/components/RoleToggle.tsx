@@ -1,16 +1,19 @@
 "use client";
 
+import { useRoleStore } from "@/stores/useRoleStore";
 import { motion, useAnimation } from "motion/react";
 import React, { useEffect, useState } from "react";
 
 const RoleToggle = () => {
   const [selectedTab, setSelectedTab] = useState<"tutor" | "student">("tutor");
+  const setRole = useRoleStore((state) => state.setRole);
   const controls = useAnimation();
 
   useEffect(() => {
     controls.start({
       x: selectedTab === "student" ? "100%" : "0%",
     });
+    setRole(selectedTab);
   }, [selectedTab]);
   return (
     <div className="flex justify-between relative rounded-3xl bg-surface p-2">
@@ -22,7 +25,7 @@ const RoleToggle = () => {
         }
         className={`${
           selectedTab === "tutor" ? "text-primaryText" : "text-secondaryText/50"
-        } rounded-3xl text-sm p-2 cursor-pointer w-1/2 f-c-row font-bold`}
+        } rounded-3xl p-2 cursor-pointer w-1/2 f-c-row font-bold`}
       >
         I&apos; m a tutor
       </div>
@@ -34,7 +37,7 @@ const RoleToggle = () => {
         }
         className={`${
           selectedTab === "student" ? "text-primaryText" : "text-secondaryText/50"
-        } rounded-3xl text-sm p-2 cursor-pointer font-bold w-1/2 f-c-row`}
+        } rounded-3xl p-2 cursor-pointer font-bold w-1/2 f-c-row`}
       >
         I&apos; m a student
       </div>

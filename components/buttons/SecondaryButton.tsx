@@ -1,4 +1,4 @@
-import { ButtonInterface } from '@/types/button'
+import { ButtonInterface } from '@/interfaces/button'
 import React from 'react'
 
 export const SecondaryButton : React.FC<ButtonInterface> = ({text, icon, onPressed}) => {

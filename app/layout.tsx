@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { Toaster } from "react-hot-toast";
+import { SessionProviderComponent } from "@/lib/SessionProviderComponent";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -18,7 +20,7 @@ export const metadata: Metadata = {
   description: "Your only educational platform!",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -28,7 +30,17 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <SessionProviderComponent>
         {children}
+        </SessionProviderComponent>
+        <Toaster
+          toastOptions={{
+            style: {
+              backgroundColor: "var(--color-surface)",
+              color: "var(--color-primaryText)",
+            },
+          }}
+        />
       </body>
     </html>
   );

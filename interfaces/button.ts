@@ -5,5 +5,6 @@ export interface ButtonInterface {
     icon?: ReactElement;
     textFirst?: boolean;
     className?: string;
+    showLoading?: boolean;
     onPressed: (param?: boolean | string | number) => void;
 }
