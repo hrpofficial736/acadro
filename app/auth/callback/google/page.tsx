@@ -12,8 +12,8 @@ export default function CallbackPage() {
       console.log(session?.user.username, status);
       
         if (status === "authenticated" && session.user.username) {
-          
-            router.push(`/dashboard/user/${session.user.username}`)
+
+            router.push(`/dashboard/${session.user.role}/${session.user.username}`)
         }
     }, [session?.user.username, status])
 

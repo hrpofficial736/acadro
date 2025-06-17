@@ -131,7 +131,7 @@ export const authOptions: AuthOptions = {
         return true;
       }
       user.role = "student";
-      user.username = student?.username!;
+      user.username = student!.username!;
       return true;
     },
     async jwt({ token, user }) {
