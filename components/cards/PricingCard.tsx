@@ -27,7 +27,7 @@ const PricingCard = ({
         e.currentTarget.style.setProperty("--y", `${y}px`);
       }}
     >
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_var(--x)_var(--y),#0C094E,transparent_80%)] pointer-events-none transition-opacity duration-400 opacity-0 group-hover:opacity-100"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_var(--x)_var(--y),#4f46e5,transparent_90%)] pointer-events-none transition-opacity duration-400 opacity-0 group-hover:opacity-100"></div>
       <div className="relative flex flex-col gap-2">
         <p className="text-sm text-secondaryText font-semibold">
           {isFree ? "Free" : "Premium"}

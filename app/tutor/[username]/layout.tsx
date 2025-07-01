@@ -8,6 +8,8 @@ import Image from "next/image";
 import SearchField from "./components/SearchField";
 import DashboardSmallSidebar from "./components/DashboardSmallSidebar";
 import { useSession } from "next-auth/react";
+import { dummyUrl } from "@/utils/constants";
+import Placeholder from "@/components/placeholders/Placeholder";
 
 export default function Layout({ children }: { children: ReactNode }) {
   const { data: session } = useSession();
@@ -17,8 +19,7 @@ export default function Layout({ children }: { children: ReactNode }) {
     userEmail = session.user.email;
     userImage = session.user.image;
   }
-  const dummyUrl =
-    "https://img.freepik.com/free-vector/blank-book-white-background_1308-23052.jpg?ga=GA1.1.1167649640.1747117581&semt=ais_hybrid&w=740";
+
   const [showSideBar, setShowSideBar] = useState<boolean>(false);
 
   return (
@@ -27,7 +28,6 @@ export default function Layout({ children }: { children: ReactNode }) {
         onClose={() => setShowSideBar(false)}
         display={showSideBar}
       />
-      {!showSideBar && (
         <>
           <div className="flex flex-col md:flex-row max-md:gap-7 md:justify-between md:items-start m-3">
             <Logo />
@@ -41,28 +41,50 @@ export default function Layout({ children }: { children: ReactNode }) {
               </div>
             </div>
 
-            <div className="f-c-row max-md:hidden justify-between gap-3 p-3 rounded-xl hover:bg-surface transition-colors duration-300 cursor-pointer">
-              <Image
-                alt="Your profile Photo"
-                src={userImage || dummyUrl}
-                width={50}
-                height={50}
-                className="rounded-full border-2 border-white"
-              />
-              <div className="f-c-col items-start">
-                <h1 className="text-lg font-bold text-primaryText">
-                  {userFullName}
-                </h1>
-                <h6 className="text-secondaryText text-sm">{userEmail}</h6>
+            {userImage?.trim() !== "" && userFullName && userEmail ? (
+              <div className="f-c-row max-md:hidden justify-between gap-3 p-3 rounded-xl hover:bg-surface transition-colors duration-300 cursor-pointer">
+                <Image
+                  alt="Your profile Photo"
+                  src={userImage || dummyUrl!}
+                  width={50}
+                  height={50}
+                  className="rounded-full border-2 border-white"
+                />
+                <div className="f-c-col items-start">
+                  <h1 className="text-lg font-bold text-primaryText">
+                    {userFullName}
+                  </h1>
+                  <h6 className="text-secondaryText text-sm">{userEmail}</h6>
+                </div>
               </div>
-            </div>
+            ) : (
+              <div className="f-c-row gap-2 max-md:hidden">
+                <Placeholder
+                  width={50}
+                  height={50}
+                  className="rounded-full bg-surface"
+                />
+                <span className="f-c-col gap-2">
+                  <Placeholder
+                    width={200}
+                    height={18}
+                    className="rounded bg-surface"
+                  />
+                  <Placeholder
+                    width={200}
+                    height={18}
+                    className="rounded bg-surface"
+                  />
+                </span>
+              </div>
+            )}
           </div>
-          <div className="flex items-center md:gap-10">
+          <div className="flex">
             <DashboardSidebar />
             {children}
           </div>
         </>
-      )}
+      
     </div>
   );
 }

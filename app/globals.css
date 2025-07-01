@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 @theme {
+  /* colors */
   --color-background: #0f1117;
   --color-surface: #1e1f26;
   --color-primary: #4f46e5;
@@ -11,6 +12,9 @@
   --color-border: #2a2c35;
   --color-input: #1c1c1c;
   --color-amber: #f59e0b;
+
+  /* breakpoint */
+  --breakpoint-custom580: 580px;
 }
 
 *::-webkit-scrollbar {
@@ -91,5 +95,8 @@ body {
   }
   .input {
     @apply px-3 py-2 bg-gradient-to-b from-background to-white/10 appearance-none text-primaryText/90 focus:outline-none border border-white/30 focus:border-secondaryText focus:shadow-sm shadow-secondaryText active:scale-[0.98] transition-transform duration-300 rounded-lg;
+  }
+  .analytics-card {
+    @apply bg-gradient-to-b from-primaryText/10 via-surface/60 to-surface/20 rounded-xl px-5 py-3 w-[300px] h-[250px] lg:w-[400px] lg:h-[300px] xl:w-[500px] xl:h-[350px] flex flex-col col-span-2 row-span-2;
   }
 }

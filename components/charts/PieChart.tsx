@@ -9,10 +9,11 @@ type PieChartProps = {
     strokeWidth: number;
     percentage: number;
     content: number;
+    subContent?: string;
     isMoney: boolean;
 }
 
-const PieChart = ({ size, strokeWidth, percentage, content, isMoney }: PieChartProps) => {
+const PieChart = ({ size, strokeWidth, percentage, content, subContent, isMoney }: PieChartProps) => {
   const radius = (size - strokeWidth) / 2;
   const circumference = 2 * Math.PI * radius;
   const [offset, setOffset] = useState(circumference);
@@ -26,7 +27,7 @@ const PieChart = ({ size, strokeWidth, percentage, content, isMoney }: PieChartP
     return () => clearTimeout(timeout);
   }, [percentage]);
   return (
-    <div className="self-center relative">
+    <div className="self-start relative">
       <svg width={size} height={size}>
         <circle
           r={radius}
@@ -52,8 +53,9 @@ const PieChart = ({ size, strokeWidth, percentage, content, isMoney }: PieChartP
       </svg>
       <div className="flex justify-center gap-1 font-black absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
         { isMoney && <p className="text-secondaryText text-[calc(200%/2.5)]">$</p>}
-        <h1 className="text-primaryText text-[calc(200%/2)]">
+        <h1 className="text-primaryText text-[calc(200%/2)] text-center">
           <CountUp start={0} end={content} decimals={ !isMoney ? 0 : 2} duration={1.5} />
+          <p className="text-secondaryText text-xs font-semibold text-center">{ subContent }</p>
         </h1>
       </div>
     </div>

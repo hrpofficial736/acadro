@@ -24,26 +24,26 @@ const Sidebar = () => {
     {
       icon: <SiGoogleclassroom />,
       text: "Dashboard",
-      onPressed: () => router.push(`dashboard`),
+      onPressed: () => router.push(`./dashboard`),
     },
     {
       icon: <SiGoogleclassroom />,
       text: "Classrooms",
-      onPressed: () => router.push(`classrooms`),
+      onPressed: () => router.push(`./classrooms`),
     },
     {
       icon: <FaChartLine />,
       text: "Analytics",
-      onPressed: () => router.push(`classrooms`),
+      onPressed: () => router.push(`./analytics`),
     },
     {
       icon: <TbPremiumRights />,
       text: "Subscriptions",
-      onPressed: () => router.push(`classrooms`),
+      onPressed: () => router.push(`./subscription`),
     },
     {
       icon: <MdLeaderboard />,
-      text: "Leaderboard",
+      text: "Earnings",
       onPressed: () => router.push(`classrooms`),
     },
     {
@@ -68,22 +68,23 @@ const Sidebar = () => {
       onMouseEnter={() => setCollapse(false)}
       whileHover={{
         width: 250,
-        height: 550
+        height: 550,
       }}
       transition={{
         type: "tween",
         duration: 0.2,
       }}
-      className={`bg-surface/70 p-5 fixed rounded-3xl max-md:hidden ${
-        !collapse && "w-60"
-      } f-c-col`}
+      className={`bg-surface/70 p-5 fixed top-1/2 -translate-y-1/2 inset-0 rounded-3xl max-md:hidden f-c-col ${collapse && "w-28"}`}
     >
       <ul className="list-none f-c-col items-start gap-5">
         {options.map((option, index) => {
           return (
             <div
               key={index}
-              className={`flex items-center justify-start overflow-hidden ${!collapse && "w-52"} gap-6 px-5 py-3 font-bold rounded-3xl cursor-pointer transition-all hover:shadow-xs duration-200 hover:bg-background/10 ${
+              onClick={option.onPressed}
+              className={`flex items-center justify-start overflow-hidden ${
+                !collapse && "w-52"
+              } gap-6 px-5 py-3 font-bold rounded-3xl cursor-pointer transition-all hover:shadow-xs duration-200 hover:bg-background/10 ${
                 options.indexOf(option) === 7
                   ? "shadow-error  text-error font-bold"
                   : "shadow-primary "
