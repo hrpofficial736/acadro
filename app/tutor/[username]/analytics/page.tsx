@@ -20,7 +20,7 @@ export default function Analytics() {
         duration: 0.2,
         type: "tween",
       }}
-      className="px-4 py-3 overflow-y-scroll overflow-x-hidden border max-lg:mx-auto ml-auto max-w-[90%]"
+      className="px-4 mt-10 py-3 overflow-y-scroll overflow-x-hidden border max-lg:mx-auto ml-auto max-w-[90%]"
     >
       <YourActivity />
       <ClassroomsAnalytics />

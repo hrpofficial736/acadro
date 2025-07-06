@@ -13,12 +13,12 @@ const MySubscription = () => {
         </p>
       </h1>
 
-      <div className="f-c-row self-start w-[100px] gap-2 border border-primary bg-primary/10 font-black text-primary rounded-3xl px-3 py-2">
+      <div className="f-c-row mt-5 self-start w-[100px] gap-2 border border-primary bg-primary/10 font-black text-primary rounded-3xl px-3 py-2">
         <CgLock className="text-primary" />
         Free
       </div>
 
-    <div className="grid grid-cols-2 grid-rows-3 gap-5">
+    <div className="grid grid-cols-2 self-start lg:grid-cols-3 grid-rows-3 gap-10">
         <SubscriptionLimitsCard suffix="" header="Total active classrooms" start={4} end={10} />
         <SubscriptionLimitsCard suffix="" header="Total active classrooms" start={4} end={10} />
         <SubscriptionLimitsCard suffix="" header="Total active classrooms" start={4} end={10} />

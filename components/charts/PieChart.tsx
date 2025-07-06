@@ -27,7 +27,7 @@ const PieChart = ({ size, strokeWidth, percentage, content, subContent, isMoney 
     return () => clearTimeout(timeout);
   }, [percentage]);
   return (
-    <div className="self-start relative">
+    <div className="self-center relative">
       <svg width={size} height={size}>
         <circle
           r={radius}

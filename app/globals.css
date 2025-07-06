@@ -99,4 +99,7 @@ body {
   .analytics-card {
     @apply bg-gradient-to-b from-primaryText/10 via-surface/60 to-surface/20 rounded-xl px-5 py-3 w-[300px] h-[250px] lg:w-[400px] lg:h-[300px] xl:w-[500px] xl:h-[350px] flex flex-col col-span-2 row-span-2;
   }
+  .my-list-item {
+    @apply f-c-row justify-between font-bold cursor-pointer text-sm w-full px-4 py-3 rounded-2xl duration-200;
+  }
 }

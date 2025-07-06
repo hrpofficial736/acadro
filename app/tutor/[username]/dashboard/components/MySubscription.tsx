@@ -38,7 +38,7 @@ const MySubscription = () => {
       </div>
 
       <div className="h-full flex flex-col gap-5 md:gap-3 items-start">
-        <div className="px-3 py-1 border-2 font-normal border-primary/5 bg-primary rounded-3xl f-c-row gap-2">
+        <div className="px-3 py-1-2 font-normal-primary/5 bg-primary rounded-3xl f-c-row gap-2">
           <CgLock className="text-white" />
           Free
         </div>
@@ -55,7 +55,7 @@ const MySubscription = () => {
             </div>
           </div>
 
-          <div className="flex flex-col gap-3 items-center justify-around w-full">
+          <div className="flex flex-col gap-3 items-center w-full">
             <p className="text-xs text-secondaryText text-center">
               Total Active
               <br /> Classrooms

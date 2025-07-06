@@ -8,58 +8,57 @@ import { CgProfile } from "react-icons/cg";
 import { MdLeaderboard } from "react-icons/md";
 import { IoSettings } from "react-icons/io5";
 import { RiLogoutBoxLine } from "react-icons/ri";
-import { useRouter } from "next/navigation";
 import { motion } from "motion/react";
+import Link from "next/link";
 
 type Option = {
   icon: ReactElement;
   text: string;
-  onPressed: (e: React.MouseEvent<HTMLDivElement>) => void;
+  path: string;
 };
 
 const Sidebar = () => {
-  const router = useRouter();
   const [collapse, setCollapse] = useState<boolean>(true);
   const options: Option[] = [
     {
       icon: <SiGoogleclassroom />,
       text: "Dashboard",
-      onPressed: () => router.push(`./dashboard`),
+      path: `./dashboard`,
     },
     {
       icon: <SiGoogleclassroom />,
       text: "Classrooms",
-      onPressed: () => router.push(`./classrooms`),
+      path: `./classrooms`,
     },
     {
       icon: <FaChartLine />,
       text: "Analytics",
-      onPressed: () => router.push(`./analytics`),
+      path: `./analytics`,
     },
     {
       icon: <TbPremiumRights />,
       text: "Subscriptions",
-      onPressed: () => router.push(`./subscription`),
+      path: `./subscription`,
     },
     {
       icon: <MdLeaderboard />,
       text: "Earnings",
-      onPressed: () => router.push(`classrooms`),
+      path: `./earnings`,
     },
     {
       icon: <CgProfile />,
       text: "Profile",
-      onPressed: () => router.push(`classrooms`),
+      path: `./profile`,
     },
     {
       icon: <IoSettings />,
       text: "Settings",
-      onPressed: () => router.push(`classrooms`),
+      path: `./settings`,
     },
     {
       icon: <RiLogoutBoxLine className="hover:font-bold hover:text-error" />,
       text: "Log out",
-      onPressed: () => router.push(`classrooms`),
+      path: `classrooms`,
     },
   ];
   return (
@@ -68,7 +67,7 @@ const Sidebar = () => {
       onMouseEnter={() => setCollapse(false)}
       whileHover={{
         width: 250,
-        height: 550,
+        height: 560,
       }}
       transition={{
         type: "tween",
@@ -79,9 +78,9 @@ const Sidebar = () => {
       <ul className="list-none f-c-col items-start gap-5">
         {options.map((option, index) => {
           return (
-            <div
+            <Link
               key={index}
-              onClick={option.onPressed}
+              href={option.path}
               className={`flex items-center justify-start overflow-hidden ${
                 !collapse && "w-52"
               } gap-6 px-5 py-3 font-bold rounded-3xl cursor-pointer transition-all hover:shadow-xs duration-200 hover:bg-background/10 ${
@@ -102,7 +101,7 @@ const Sidebar = () => {
               >
                 {option.text}
               </motion.span>
-            </div>
+            </Link>
           );
         })}
       </ul>
