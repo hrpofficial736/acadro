@@ -1,6 +1,6 @@
 "use client";
 
-import { dummyUrl } from "@/utils/constants";
+import Placeholder from "@/components/placeholders/Placeholder";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import React, { useState } from "react";
@@ -19,20 +19,21 @@ const MyInfo = () => {
 
   const [text, setText] = useState<string>("Copy");
 
+
   return (
-    <div className="f-c-row justify-start gap-10 w-full border">
-      <Image
-        src={userImage || dummyUrl!}
+    <div className="flex flex-col lg:flex-row justify-start gap-10 w-full">
+      {typeof userImage === "string" && userImage?.trim() !== "" ? <Image
+        src={userImage!}
         alt="Your profile photo"
         width={200}
         height={200}
         quality={100}
         className="rounded-full border-4 border-primary object-cover"
-      />
+      /> : <Placeholder width={200} height={200} className="rounded-full" />}
 
-      <div className="text-5xl font-semibold text-primaryText">
+      <div className="text-3xl lg:text-5xl font-semibold text-primaryText flex flex-col items-start justify-center">
         <div className="f-c-row gap-7">
-          <h1 className="">{userFullName}</h1>
+          {userFullName ? <h1 className="">{userFullName}</h1> : <Placeholder width={500} height={50} className="rounded-xl" />}
           <div className="bg-yellow-50 border border-yellow-500 f-c-row gap-2 rounded-3xl p-2 text-amber text-xs">
             <FaStar />
             {userRole}

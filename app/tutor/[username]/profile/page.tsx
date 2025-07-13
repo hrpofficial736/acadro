@@ -1,5 +1,9 @@
 import * as motion from "motion/react-client";
 import MyInfo from "./components/MyInfo";
+import AboutMe from "./components/AboutMe";
+import ContactInfo from "./components/ContactInfo";
+import EducationalBackground from "./components/EducationalBackground";
+import Classrooms from "./components/Classrooms";
 
 export default function Profile() {
   return (
@@ -27,6 +31,14 @@ export default function Profile() {
       </h1>
 
       <MyInfo />
+
+
+      <div className="flex flex-col lg:grid grid-cols-3 grid-rows-4 gap-5 p-3">
+        <AboutMe />
+        <ContactInfo />
+        <EducationalBackground />
+        <Classrooms />
+      </div>
     </motion.div>
   );
 }
