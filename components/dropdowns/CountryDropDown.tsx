@@ -2,33 +2,24 @@
 
 import React, { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { MdArrowDropDown } from "react-icons/md";
-import clsx from "clsx";
+import { IoIosArrowDown } from "react-icons/io";
+import countries from "@/utils/countries.json";
 
-const CustomDropDown = ({
-  placeholder,
-  listOfOptions,
-  className,
-  label
-}: {
-  placeholder: string;
-  listOfOptions: string[];
-  className?: string;
-  label?: string;
-}) => {
+const CountryDropDown = () => {
   const [showDropDown, setShowDropDown] = useState<boolean>(false);
-  const [content, setContent] = useState<string>(placeholder);
+
+  const [content, setContent] = useState<string>("Select your country");
+  
   return (
-    <div className={clsx("flex flex-col items-between gap-2 relative", className)}>
-      <label className="text-sm font-medium text-primaryText/80" htmlFor={label}>{ label }</label>
+    <div className="flex flex-col items-between gap-2 relative">
       <div
         onClick={() => {
           setShowDropDown(!showDropDown);
         }}
-        className="flex items-center bg-radial from-secondaryText/30 to-surface gap-2 rounded-lg px-3 py-2 text-sm font-semibold cursor-pointer active:scale-[0.98] transition-all duration-200"
+        className="f-c-row justify-between bg-radial from-secondaryText/30 to-surface gap-4 rounded-lg px-3 py-2 min-w-[200px] text-sm font-semibold cursor-pointer active:scale-[0.98] transition-all duration-200"
       >
         {content}
-        <MdArrowDropDown
+        <IoIosArrowDown
           className={`${
             showDropDown && "rotate-180 transition-all duration-300"
           }`}
@@ -56,19 +47,20 @@ const CustomDropDown = ({
               duration: 0.2,
               type: "tween",
             }}
-            className={`bg-surface absolute top-16 w-full z-[9999] flex flex-col gap-2 rounded-lg max-h-[200px] overflow-y-scroll `}
+            className={`bg-surface absolute top-10 w-full z-[9999] flex flex-col gap-2 rounded-lg h-[150px] overflow-y-scroll`}
           >
-            {listOfOptions.map((option, index) => {
+            {countries.map((country, index) => {
               return (
                 <div
                   onClick={() => {
-                    setContent(option);
+                    setContent(`${country.flag}\u00A0${country.name}`);
                     setShowDropDown(false);
                   }}
-                  className="px-3 py-2 f-c-row font-bold text-primaryText/80 w-full cursor-pointer hover:bg-secondaryText/10 transition-colors duration-200"
+                  className="px-3 py-2 flex gap-4 text-sm font-bold text-primaryText/80 w-full cursor-pointer hover:bg-secondaryText/10 transition-colors duration-200"
                   key={index}
                 >
-                  {option}
+                  {country.flag}
+                  <span>{country.name}</span>
                 </div>
               );
             })}
@@ -79,4 +71,4 @@ const CustomDropDown = ({
   );
 };
 
-export default CustomDropDown;
+export default CountryDropDown;

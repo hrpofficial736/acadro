@@ -10,6 +10,8 @@ import DashboardSmallSidebar from "./components/DashboardSmallSidebar";
 import { useSession } from "next-auth/react";
 import { dummyUrl } from "@/utils/constants";
 import Placeholder from "@/components/placeholders/Placeholder";
+import Window from "@/components/window/Window";
+import { useLogOutWindowStore } from "@/stores/useLogOutWindowStore";
 
 export default function Layout({ children }: { children: ReactNode }) {
   const { data: session } = useSession();
@@ -22,14 +24,16 @@ export default function Layout({ children }: { children: ReactNode }) {
 
   const [showSideBar, setShowSideBar] = useState<boolean>(false);
 
+  const isLogOutWindowOpened = useLogOutWindowStore((state) => state.show);
+
   return (
-    <div className="text-primaryText w-screen h-screen bg-background py-3 md:px-6 md:py-6 overflow-x-hidden">
+    <div className="text-primaryText w-screen h-screen bg-background py-3 md:px-6 md:py-6 overflow-x-hidden relative">
       <DashboardSmallSidebar
         onClose={() => setShowSideBar(false)}
         display={showSideBar}
       />
         <>
-          <div className="flex flex-col md:flex-row max-md:gap-7 md:justify-between md:items-start m-3">
+          <div className={`flex flex-col md:flex-row max-md:gap-7 md:justify-between md:items-start m-3 ${isLogOutWindowOpened && "brightness-50"}`}>
             <Logo />
             <div className="f-c-row gap-8 ">
               <SearchField />
@@ -79,12 +83,12 @@ export default function Layout({ children }: { children: ReactNode }) {
               </div>
             )}
           </div>
-          <div className="flex">
+          <div className={`flex ${isLogOutWindowOpened && "brightness-50"}`}>
             <DashboardSidebar />
             {children}
           </div>
         </>
-      
+      <Window />
     </div>
   );
 }

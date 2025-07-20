@@ -15,6 +15,7 @@
 
   /* breakpoint */
   --breakpoint-custom580: 580px;
+  --breakpoint-custom900: 900px;
 }
 
 *::-webkit-scrollbar {
@@ -58,10 +59,10 @@ body {
 
 @layer components {
   .primary-btn {
-    @apply rounded-xl px-3 py-2 bg-radial from-primary to-primary/60 text-primaryText active:transform active:scale-90 transition-all text-base font-bold cursor-pointer duration-300 f-c-row;
+    @apply rounded-xl px-3 py-2 bg-radial from-primary to-primary/60 text-primaryText active:transform active:scale-[0.95] transition-all font-bold cursor-pointer duration-300 f-c-row;
   }
   .sec-btn {
-    @apply rounded-xl px-3 py-2 bg-radial from-primaryText to-primaryText/60 text-background text-sm font-bold cursor-pointer hover:bg-primaryText/80 transition-colors duration-300 f-c-row;
+    @apply rounded-xl px-3 py-2 bg-radial from-secondaryText/30 to-surface text-primaryText font-bold cursor-pointer active:transform active:scale-[0.95] transition-all duration-300 f-c-row;
   }
   .navbar {
     @apply rounded-3xl border border-white/10 backdrop-blur-xl bg-surface mt-10 w-[80%] px-3 py-3 md:px-7 md:py-5 f-c-row justify-between;
@@ -94,7 +95,7 @@ body {
     @apply w-full min-h-[300px] p-7 md:px-16 md:pt-16 pb-3 rounded-2xl bg-surface/50 f-c-col gap-20;
   }
   .input {
-    @apply px-3 py-2 bg-gradient-to-b from-background to-white/10 appearance-none text-primaryText/90 focus:outline-none border border-white/30 focus:border-secondaryText focus:shadow-sm shadow-secondaryText active:scale-[0.98] transition-transform duration-300 rounded-lg;
+    @apply px-3 py-2 bg-gradient-to-b from-background to-white/10 appearance-none min-w-[100px] max-w-[350px] text-primaryText/90 focus:outline-none border border-white/30 focus:border-secondaryText focus:shadow-sm shadow-secondaryText active:scale-[0.99] transition-transform duration-300 rounded-lg;
   }
   .analytics-card {
     @apply bg-gradient-to-b from-primaryText/10 via-surface/60 to-surface/20 rounded-xl px-5 py-3 w-[300px] h-[250px] lg:w-[400px] lg:h-[300px] xl:w-[500px] xl:h-[350px] flex flex-col col-span-2 row-span-2;

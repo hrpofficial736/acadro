@@ -10,15 +10,17 @@ import { IoSettings } from "react-icons/io5";
 import { RiLogoutBoxLine } from "react-icons/ri";
 import { motion } from "motion/react";
 import Link from "next/link";
+import { useLogOutWindowStore } from "@/stores/useLogOutWindowStore";
 
 type Option = {
   icon: ReactElement;
   text: string;
-  path: string;
+  path?: string;
 };
 
 const Sidebar = () => {
   const [collapse, setCollapse] = useState<boolean>(true);
+  const toggleShow = useLogOutWindowStore((state) => state.toggleShow);
   const options: Option[] = [
     {
       icon: <SiGoogleclassroom />,
@@ -58,7 +60,6 @@ const Sidebar = () => {
     {
       icon: <RiLogoutBoxLine className="hover:font-bold hover:text-error" />,
       text: "Log out",
-      path: `classrooms`,
     },
   ];
   return (
@@ -80,7 +81,10 @@ const Sidebar = () => {
           return (
             <Link
               key={index}
-              href={option.path}
+              href={option.path ?? "#"}
+              onClick={() => {
+                if (index === 7) toggleShow()
+              }}
               className={`flex items-center justify-start overflow-hidden ${
                 !collapse && "w-52"
               } gap-6 px-5 py-3 font-bold rounded-3xl cursor-pointer transition-all hover:shadow-xs duration-200 hover:bg-background/10 ${

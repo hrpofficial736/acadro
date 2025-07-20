@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import React, { HTMLInputTypeAttribute } from "react";
 
 const CustomTextField = ({
@@ -7,6 +8,7 @@ const CustomTextField = ({
   type,
   value,
   onChanged,
+  className
 }: {
   name: string;
   label: string;
@@ -14,15 +16,15 @@ const CustomTextField = ({
   type: HTMLInputTypeAttribute;
   value: string;
   onChanged: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  className?: string
 }) => {
   return (
-    <div className="flex flex-col gap-1">
+    <div className={clsx("flex flex-col gap-2 max-w-[500px]", className)}>
       <label className="text-sm font-medium text-primaryText/80" htmlFor={name}>
         {label}
       </label>
       <input
       value={value}
-      autoComplete="email webauthn"
       onChange={onChanged}
         name={name}
         type={type}

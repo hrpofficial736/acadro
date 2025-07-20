@@ -1,21 +1,25 @@
 "use client";
 
 import { motion } from "motion/react";
-import { useEffect, useState } from "react";
-// import AccountSettings from "./components/AccountSettings";
-// import ProfileSettings from "./components/ProfileSettings";
-// import NotificationSettings from "./components/NotificationSettings";
-// import PaymentsSettings from "./components/PaymentsSettings";
-// import PrivacySettings from "./components/PrivacySettings";
+import { ReactElement, useEffect, useState } from "react";
+import AccountSettings from "./components/AccountSettings";
+import ProfileSettings from "./components/ProfileSettings";
+import NotificationSettings from "./components/NotificationSettings";
+import PaymentsSettings from "./components/PaymentsSettings";
+import PrivacySettings from "./components/PrivacySettings";
 
+type SettingsProp = {
+  name: string;
+  component: ReactElement
+}
 
 export default function SettingsPage() {
-  const settingsList = [
-    "Account",
-    "Profile",
-    "Notifications",
-    "Payments and Subscriptions",
-    "Privacy and Security"
+  const settingsList: SettingsProp[] = [
+    {name: "Account", component: <AccountSettings />},
+    {name: "Profile", component: <ProfileSettings />},
+    {name: "Notifications", component: <NotificationSettings />},
+    {name: "Payments and Subscriptions", component: <PaymentsSettings />},
+    {name: "Privacy and Security", component: <PrivacySettings />},
   ];
 
   const [current, setCurrent] = useState<number>(0);
@@ -39,7 +43,7 @@ export default function SettingsPage() {
         duration: 0.2,
         type: "tween",
       }}
-      className="px-4 py-3 f-c-col gap-10 overflow-y-scroll overflow-x-hidden max-lg:mx-auto ml-auto w-full lg:max-w-[90%]"
+      className="px-4 py-3 f-c-col gap-10 overflow-y-scroll overflow-x-hidden w-full lg:max-w-[90%] ml-auto mt-[50px]"
     >
       <h1 className="text-primaryText/80 text-xl font-bold self-start">
         Settings
@@ -53,7 +57,7 @@ export default function SettingsPage() {
         {settingsList.map((setting, index) => {
             return (
                 <div onClick={() => setCurrent(index)} key={index} className={`px-3 py-2 font-semibold cursor-pointer text-primaryText/80 ${current !== index && "text-secondaryText/50"}`}>
-                    { setting }
+                    { setting.name }
                     <motion.div initial={{
                         opacity: 0,
                         width: 0
@@ -71,7 +75,7 @@ export default function SettingsPage() {
 
 
       {/* Components */}
-      {settingsList[current]}
+      {settingsList[current].component}
     </motion.div>
   );
 }
