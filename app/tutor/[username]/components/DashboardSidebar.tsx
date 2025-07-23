@@ -10,7 +10,8 @@ import { IoSettings } from "react-icons/io5";
 import { RiLogoutBoxLine } from "react-icons/ri";
 import { motion } from "motion/react";
 import Link from "next/link";
-import { useLogOutWindowStore } from "@/stores/useLogOutWindowStore";
+import { useWindowStore } from "@/stores/useWindowStore";
+import { usePathname } from "next/navigation";
 
 type Option = {
   icon: ReactElement;
@@ -20,7 +21,9 @@ type Option = {
 
 const Sidebar = () => {
   const [collapse, setCollapse] = useState<boolean>(true);
-  const toggleShow = useLogOutWindowStore((state) => state.toggleShow);
+  const path = usePathname().split("/")[3];
+
+  const toggleShow = useWindowStore((state) => state.toggleShow);
   const options: Option[] = [
     {
       icon: <SiGoogleclassroom />,
@@ -74,7 +77,9 @@ const Sidebar = () => {
         type: "tween",
         duration: 0.2,
       }}
-      className={`bg-surface/70 p-5 fixed top-1/2 -translate-y-1/2 inset-0 rounded-3xl max-md:hidden f-c-col ${collapse && "w-28"}`}
+      className={`bg-surface/70 p-5 fixed top-1/2 -translate-y-1/2 inset-0 rounded-3xl max-md:hidden f-c-col ${
+        collapse && "w-28"
+      }`}
     >
       <ul className="list-none f-c-col items-start gap-5">
         {options.map((option, index) => {
@@ -83,11 +88,13 @@ const Sidebar = () => {
               key={index}
               href={option.path ?? "#"}
               onClick={() => {
-                if (index === 7) toggleShow()
+                if (index === 7) toggleShow("logout");
               }}
               className={`flex items-center justify-start overflow-hidden ${
                 !collapse && "w-52"
-              } gap-6 px-5 py-3 font-bold rounded-3xl cursor-pointer transition-all hover:shadow-xs duration-200 hover:bg-background/10 ${
+              } gap-6 px-5 py-3 font-bold rounded-3xl cursor-pointer transition-all ${
+                path === option.path?.split("/")[1] && "shadow-md"
+              } hover:shadow-xs duration-200 hover:bg-background/10 ${
                 options.indexOf(option) === 7
                   ? "shadow-error  text-error font-bold"
                   : "shadow-primary "

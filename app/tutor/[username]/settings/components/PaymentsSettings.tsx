@@ -1,9 +1,20 @@
+"use client";
+
+import { motion } from "motion/react";
 import { PrimaryButton } from "@/components/buttons/PrimaryButton";
 import React from "react";
 
 const PaymentsSettings = () => {
   return (
-    <div className="flex flex-col gap-16 w-full lg:w-[50%]">
+    <motion.div initial={{ x: +100, opacity: 0 }}
+        animate={{
+          x: 0,
+          opacity: 1,
+        }}
+        transition={{
+          duration: 0.3,
+          ease: "easeInOut",
+        }} className="flex flex-col gap-16 w-full lg:w-[50%]">
       {/* Current Plan */}
       <div className="bg-surface flex items-center justify-between px-4 py-3 rounded-xl outline-2 outline-border">
         <div className="text-sm font-semibold text-primaryText/80">
@@ -102,7 +113,7 @@ const PaymentsSettings = () => {
 
         
       </div>
-    </div>
+    </motion.div>
   );
 };
 

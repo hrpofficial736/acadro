@@ -38,8 +38,8 @@ const MySubscription = () => {
       </div>
 
       <div className="h-full flex flex-col gap-5 md:gap-3 items-start">
-        <div className="px-3 py-1-2 font-normal-primary/5 bg-primary rounded-3xl f-c-row gap-2">
-          <CgLock className="text-white" />
+        <div className="px-3 py-2 font-normal-primary/5 bg-primary/10 text-primary border-2 border-primary rounded-3xl f-c-row gap-2">
+          <CgLock className="text-primary" />
           Free
         </div>
 
@@ -49,7 +49,13 @@ const MySubscription = () => {
               Total Active
               <br /> Classrooms
             </p>
-            <PieChart size={ 70 } strokeWidth={ 10 } percentage={75} content={9} isMoney={ false } />
+            <PieChart
+              size={70}
+              strokeWidth={10}
+              percentage={75}
+              content={9}
+              isMoney={false}
+            />
             <div className="text-sm f-c-row items-end">
               <h1 className="text-3xl font-bold">9</h1>/10
             </div>
@@ -60,7 +66,13 @@ const MySubscription = () => {
               Total Active
               <br /> Classrooms
             </p>
-            <PieChart size={ 70 } strokeWidth={ 10 } percentage={75} content={9} isMoney={ false } />
+            <PieChart
+              size={70}
+              strokeWidth={10}
+              percentage={75}
+              content={9}
+              isMoney={false}
+            />
             <div className="text-sm f-c-row items-end">
               <h1 className="text-3xl font-bold">9</h1>/10
             </div>
@@ -70,7 +82,13 @@ const MySubscription = () => {
               Total Active
               <br /> Classrooms
             </p>
-            <PieChart size={ 70 } strokeWidth={ 10 } percentage={75} content={9} isMoney={ false } />
+            <PieChart
+              size={70}
+              strokeWidth={10}
+              percentage={75}
+              content={9}
+              isMoney={false}
+            />
             <div className="text-sm f-c-row items-end">
               <h1 className="text-3xl font-bold">9</h1>/10
             </div>

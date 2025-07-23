@@ -27,6 +27,9 @@ model Tutor {
   password String? @unique
   image String?
   social Socials?
+  classrooms Classroom[] 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt @default(now())
 }
 
 model Student {
@@ -37,4 +40,27 @@ model Student {
   password String? @unique
   image String?
   social Socials?
+  classrooms Classroom[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt @default(now())
+}
+
+model Classroom {
+  id String @id @unique @default(uuid())
+  name String
+  subject String
+  description String
+  maxStudents Int
+  isPaid Boolean
+  price Int?
+  noOfStudents Int?  @default(0)
+  sessionsTaken Int? @default(0)
+  notesUploaded Int? @default(0)
+  assignmentsGiven Int? @default(0)
+  avgMarks Int? @default(0)
+  tutor Tutor @relation(fields: [tutorId], references: [id])
+  tutorId String
+  students Student[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt @default(now())
 }

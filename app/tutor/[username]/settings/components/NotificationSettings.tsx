@@ -1,3 +1,7 @@
+"use client";
+
+
+import { motion } from "motion/react";
 import Switch from "@/components/switch/Switch";
 import React from "react";
 
@@ -18,7 +22,15 @@ const NotificationSettings = () => {
     { title: "Platform news", subtitle: "Enable platform updates." },
   ];
   return (
-    <div className="flex flex-col gap-5 w-full lg:w-[50%]">
+    <motion.div initial={{ x: 100, opacity: 0 }}
+        animate={{
+          x: 0,
+          opacity: 1,
+        }}
+        transition={{
+          duration: 0.3,
+          ease: "easeInOut",
+        }} className="flex flex-col gap-5 w-full lg:w-[50%]">
       {notifications.map((setting, index) => (
         <div
           key={index}
@@ -34,7 +46,7 @@ const NotificationSettings = () => {
           <Switch />
         </div>
       ))}
-    </div>
+    </motion.div>
   );
 };
 

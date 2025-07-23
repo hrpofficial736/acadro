@@ -5,18 +5,25 @@ import React from "react";
 import { FaPlusCircle } from "react-icons/fa";
 import { motion } from "motion/react";
 
+
+
 const MyClassrooms = () => {
   return (
-    <motion.div initial={{
+    <motion.div
+      initial={{
         scale: 0.8,
-        opacity: 0
-    }} animate={{
+        opacity: 0,
+      }}
+      animate={{
         scale: 1,
-        opacity: 1
-    }} transition={{
+        opacity: 1,
+      }}
+      transition={{
         duration: 0.2,
-        type: "tween"
-    }} className="py-3 px-6 rounded-2xl max-2xl:col-span-3 col-span-2 row-span-3 bg-gradient-to-b from-surface/40 via-surface/60 to-white/10 flex flex-col gap-5">
+        type: "tween",
+      }}
+      className="py-3 px-6 rounded-2xl relative max-2xl:col-span-3 col-span-2 row-span-3 bg-gradient-to-b from-surface/40 via-surface/60 to-white/10 flex flex-col gap-5"
+    >
       <div className="f-c-row justify-between">
         <h6 className="text-sm font-bold text-primaryText/80">My Classrooms</h6>
         <div className="flex gap-2">
@@ -55,6 +62,7 @@ const MyClassrooms = () => {
           </div>
         </div>
       </div>
+      
     </motion.div>
   );
 };

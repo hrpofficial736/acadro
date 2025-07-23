@@ -2,19 +2,21 @@
 
 import React, { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { MdArrowDropDown } from "react-icons/md";
+import { IoIosArrowDown } from "react-icons/io";
 import clsx from "clsx";
 
 const CustomDropDown = ({
   placeholder,
   listOfOptions,
   className,
-  label
+  label,
+  callback
 }: {
   placeholder: string;
   listOfOptions: string[];
   className?: string;
   label?: string;
+  callback: (value: string) => void;
 }) => {
   const [showDropDown, setShowDropDown] = useState<boolean>(false);
   const [content, setContent] = useState<string>(placeholder);
@@ -28,7 +30,7 @@ const CustomDropDown = ({
         className="flex items-center bg-radial from-secondaryText/30 to-surface gap-2 rounded-lg px-3 py-2 text-sm font-semibold cursor-pointer active:scale-[0.98] transition-all duration-200"
       >
         {content}
-        <MdArrowDropDown
+        <IoIosArrowDown
           className={`${
             showDropDown && "rotate-180 transition-all duration-300"
           }`}
@@ -64,6 +66,7 @@ const CustomDropDown = ({
                   onClick={() => {
                     setContent(option);
                     setShowDropDown(false);
+                    callback(option);
                   }}
                   className="px-3 py-2 f-c-row font-bold text-primaryText/80 w-full cursor-pointer hover:bg-secondaryText/10 transition-colors duration-200"
                   key={index}

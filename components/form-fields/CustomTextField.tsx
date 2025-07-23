@@ -14,7 +14,7 @@ const CustomTextField = ({
   label: string;
   placeholder: string;
   type: HTMLInputTypeAttribute;
-  value: string;
+  value: string | number;
   onChanged: (e: React.ChangeEvent<HTMLInputElement>) => void;
   className?: string
 }) => {
