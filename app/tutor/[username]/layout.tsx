@@ -87,7 +87,7 @@ export default function Layout({ children }: { children: ReactNode }) {
             </div>
           )}
         </div>
-        <div className={`flex ${show && current === "logout" && "brightness-50 blur-lg"}`}>
+        <div className={`flex ${show && current === "logout" && "brightness-50 blur-lg"} items-center h-full gap-10`}>
           <DashboardSidebar />
           {children}
         </div>

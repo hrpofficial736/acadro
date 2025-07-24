@@ -2,9 +2,10 @@ import { CreateClassroomFormProps } from "@/app/tutor/[username]/classrooms/comp
 
 
 export interface Classroom extends CreateClassroomFormProps {
-    noOfStudents: number | null;
-    sessionsTaken: number | null;
-    notesUploaded: number | null;
-    assignmentsGiven: number | null;
-    avgMarks: number | null;
+    id?: string;
+    noOfStudents?: number | null;
+    sessionsTaken?: number | null;
+    notesUploaded?: number | null;
+    assignmentsGiven?: number | null;
+    avgMarks?: number | null;
 }

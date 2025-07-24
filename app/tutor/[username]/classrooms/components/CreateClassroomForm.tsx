@@ -7,6 +7,7 @@ import React, { useState } from "react";
 import toast from "react-hot-toast";
 import createClassroomAction from "../actions/createClassroomAction";
 import { useWindowStore } from "@/stores/useWindowStore";
+import { useSession } from "next-auth/react";
 
 export type CreateClassroomFormProps = {
   name: string;
@@ -19,7 +20,7 @@ export type CreateClassroomFormProps = {
 
 const CreateClassroomForm = () => {
   const { toggleShow } = useWindowStore();
-
+  const { data: session } = useSession();
   const [formData, setFormData] = useState<CreateClassroomFormProps>({
     name: "",
     subject: "",
@@ -34,7 +35,7 @@ const CreateClassroomForm = () => {
   const handleFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 
-    const newValue = name === "maxStudents" ? Number.parseInt(value) : value;
+    const newValue = name === "maxStudents" || name === "price" ? Number.parseInt(value) : value;
 
     setFormData((prevData) => ({
       ...prevData,
@@ -67,7 +68,7 @@ const CreateClassroomForm = () => {
       return;
     }
 
-    const responseFromServerAction = await createClassroomAction(formData);
+    const responseFromServerAction = await createClassroomAction(formData, session?.user.username!);
 
     if (!responseFromServerAction.success) {
       toast.error(
@@ -136,7 +137,7 @@ const CreateClassroomForm = () => {
           name="price"
           label="Price of this classroom"
           onChanged={handleFormChange}
-          value={formData.price!}
+          value={formData.price?.toString()!}
           placeholder="e.g. 250"
         />
       )}

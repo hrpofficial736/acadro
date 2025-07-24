@@ -1,19 +1,37 @@
 "use server";
 
 import { prisma } from "@/lib/prismaClient";
-import { CreateClassroomFormProps } from "../components/CreateClassroomForm";
 import { serverResponse } from "@/lib/serverResponse";
+import { Classroom } from "@/interfaces/classroom";
+import { revalidatePath } from "next/cache";
 
 export default async function createClassroomAction(
-  formData: CreateClassroomFormProps
+  formData: Classroom,
+  tutorUsername: string
 ) {
   try {
-    const checkForExistingClassroom = await prisma.classroom.findFirst({
+    const checkIfUserExists = await prisma.tutor.findUnique({
       where: {
-        name: formData.name,
+        username: tutorUsername,
+      },
+      include: {
+        classrooms: true,
       },
     });
 
+    if (!checkIfUserExists)
+      return serverResponse({
+        status: 404,
+        success: false,
+        message: "Tutor not found",
+      });
+
+    const checkForExistingClassroom = await prisma.classroom.findFirst({
+      where: {
+        tutorId: checkIfUserExists.id,
+        name: formData.name,
+      },
+    });
 
     if (checkForExistingClassroom)
       return serverResponse({
@@ -22,10 +40,12 @@ export default async function createClassroomAction(
         message: "Classroom already exists!",
       });
 
-    await prisma.classroom.create({
-      data: formData,
+    const newClassroom = await prisma.classroom.create({
+      data: { ...formData, tutorId: checkIfUserExists.id },
     });
 
+    checkIfUserExists.classrooms.push(newClassroom);
+    revalidatePath("/");
     return serverResponse({
       status: 200,
       success: true,
@@ -33,7 +53,7 @@ export default async function createClassroomAction(
     });
   } catch (error) {
     console.log(error);
-    
+
     return serverResponse({
       status: 500,
       success: false,

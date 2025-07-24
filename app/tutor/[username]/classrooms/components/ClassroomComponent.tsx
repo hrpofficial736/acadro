@@ -8,6 +8,8 @@ import { useWindowStore } from "@/stores/useWindowStore";
 import Window from "@/components/window/Window";
 import CreateClassroomForm from "./CreateClassroomForm";
 import { Classroom } from "@/interfaces/classroom";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 export default function ClassroomComponent({
   classrooms,
@@ -15,6 +17,7 @@ export default function ClassroomComponent({
   classrooms: Classroom[];
 }) {
   const { toggleShow, current, show } = useWindowStore();
+  const pathname = usePathname();
   return (
     <motion.div
       initial={{
@@ -29,7 +32,7 @@ export default function ClassroomComponent({
         duration: 0.2,
         type: "tween",
       }}
-      className="p-4 sm:m-5 sm:px-12 sm:py-3 w-full sm:w-[90%] sm:ml-32 f-c-col gap-2"
+      className="w-full border sm:w-[90%] f-c-col gap-2 px-10 py-5"
     >
       {/* 4 Analytics boxes */}
       <div
@@ -58,7 +61,7 @@ export default function ClassroomComponent({
         <PrimaryButton
           icon={<FaPlusCircle />}
           text="Create"
-          className="text-xs"
+          className="text-sm rounded-lg"
           onPressed={() => toggleShow("create-classroom")}
         />
       </div>
@@ -68,47 +71,44 @@ export default function ClassroomComponent({
         }`}
       >
         <div className="grid grid-cols-5 max-sm:hidden mr-auto gap-10 px-5 text-xs w-full font-semibold text-secondaryText">
-          <p className="">Classrooms</p>
+          <p>Classrooms</p>
           <p className=" text-center">sessions taken</p>
           <p className=" text-center">notes uploaded</p>
           <p className=" text-center">assignments given</p>
           <p className=" text-center">avg. marks</p>
         </div>
 
-
-
-
-
         <div className="f-c-col items-start gap-3 w-full">
-              {classrooms.map((classroom, index) => (
-          <div key={index} className="hover:scale-[1.01] w-full group hover:bg-gradient-to-b from-surface/20 via-surface/60 to-secondaryText/10 transition-all duration-300 px-2 sm:px-5 py-3 cursor-pointer rounded-2xl">
-            
-            
-            <div className="sm:grid grid-cols-5 gap-10 f-c-row justify-start max-sm:px-3">
-                  <span className="group-hover:text-primary font-bold">
-                    {classroom.name}
-                    <br />
-                    <p className="text-sm text-secondaryText font-medium group-hover:text-primary">
-                      {`${classroom.noOfStudents} students`}
-                    </p>
-                  </span>
-                  <div className="text-xs text-secondaryText font-bold max-sm:hidden f-c-row ">
-                    {classroom.sessionsTaken}
-                  </div>
-                  <div className="text-xs text-secondaryText font-bold max-sm:hidden f-c-row">
-                    {classroom.notesUploaded}
-                  </div>
-                  <div className="text-xs text-secondaryText font-bold max-sm:hidden f-c-row">
-                    {classroom.assignmentsGiven}
-                  </div>
-                  <div className="text-xs text-secondaryText font-bold max-sm:hidden f-c-row">
-                    {classroom.avgMarks}
-                  </div>
-            </div>
-
-
-          </div>
-              ))}
+          {classrooms.map((classroom, index) => (
+            <Link
+              prefetch={true}
+              key={index}
+              href={`${pathname}/${classroom.id}`}
+              className="hover:scale-[1.01] w-full group hover:bg-gradient-to-b from-surface/20 via-surface/60 to-secondaryText/10 transition-all duration-300 px-2 sm:px-5 py-3 cursor-pointer rounded-2xl"
+            >
+              <div className="sm:grid grid-cols-5 gap-10 f-c-row justify-start max-sm:px-3">
+                <span className="group-hover:text-primary font-bold">
+                  {classroom.name}
+                  <br />
+                  <p className="text-sm text-secondaryText font-medium group-hover:text-primary">
+                    {`${classroom.noOfStudents} students`}
+                  </p>
+                </span>
+                <div className="text-xs text-secondaryText font-bold max-sm:hidden f-c-row ">
+                  {classroom.sessionsTaken}
+                </div>
+                <div className="text-xs text-secondaryText font-bold max-sm:hidden f-c-row">
+                  {classroom.notesUploaded}
+                </div>
+                <div className="text-xs text-secondaryText font-bold max-sm:hidden f-c-row">
+                  {classroom.assignmentsGiven}
+                </div>
+                <div className="text-xs text-secondaryText font-bold max-sm:hidden f-c-row">
+                  {classroom.avgMarks}
+                </div>
+              </div>
+            </Link>
+          ))}
         </div>
       </div>
       {current === "create-classroom" && (

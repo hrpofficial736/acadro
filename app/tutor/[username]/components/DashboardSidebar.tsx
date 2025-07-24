@@ -69,19 +69,20 @@ const Sidebar = () => {
     <motion.div
       onMouseLeave={() => setCollapse(true)}
       onMouseEnter={() => setCollapse(false)}
+      
       whileHover={{
         width: 250,
-        height: 560,
+        height: 570
       }}
       transition={{
         type: "tween",
         duration: 0.2,
       }}
-      className={`bg-surface/70 p-5 fixed top-1/2 -translate-y-1/2 inset-0 rounded-3xl max-md:hidden f-c-col ${
+      className={`bg-surface/70 rounded-3xl p-5 z-[9999] max-md:hidden ${
         collapse && "w-28"
       }`}
     >
-      <ul className="list-none f-c-col items-start gap-5">
+      <ul className="list-none f-c-col gap-5">
         {options.map((option, index) => {
           return (
             <Link
