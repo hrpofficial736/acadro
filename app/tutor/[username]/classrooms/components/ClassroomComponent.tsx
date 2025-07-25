@@ -32,7 +32,7 @@ export default function ClassroomComponent({
         duration: 0.2,
         type: "tween",
       }}
-      className="w-full border sm:w-[90%] f-c-col gap-2 px-10 py-5"
+      className="w-full border sm:w-[90%] f-c-col gap-2 px-10 py-5 self-start"
     >
       {/* 4 Analytics boxes */}
       <div

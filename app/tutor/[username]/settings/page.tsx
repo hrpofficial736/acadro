@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
-import { ReactElement, useEffect, useState } from "react";
+import { ReactElement, useState } from "react";
 import AccountSettings from "./components/AccountSettings";
 import ProfileSettings from "./components/ProfileSettings";
 import NotificationSettings from "./components/NotificationSettings";
@@ -24,10 +24,6 @@ export default function SettingsPage() {
 
   const [current, setCurrent] = useState<number>(0);
 
-  useEffect(() => {
-    console.log(current);
-    
-  }, [current])
 
   return (
     <motion.div
