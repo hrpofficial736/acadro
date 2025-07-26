@@ -8,7 +8,8 @@ import Sessions from "./Sessions";
 import Tests from "./Tests";
 import Notes from "./Notes";
 import Assignments from "./Assignments";
-import Analytics from "./Analytics";
+import Leaderboard from "./Leaderboard";
+import { useWindowStore } from "@/stores/useWindowStore";
 
 const IndividualClassroomComponent = () => {
   const sections = [
@@ -17,9 +18,10 @@ const IndividualClassroomComponent = () => {
     { name: "Tests", component: <Tests /> },
     { name: "Notes", component: <Notes /> },
     { name: "Assignments", component: <Assignments /> },
-    { name: "Analytics", component: <Analytics /> },
+    { name: "Analytics", component: <Leaderboard /> },
   ];
   const [current, setCurrent] = useState<number>(0);
+  const { show } = useWindowStore();
   return (
     <motion.div
       initial={{
@@ -34,10 +36,10 @@ const IndividualClassroomComponent = () => {
         duration: 0.2,
         type: "tween",
       }}
-      className="w-full h-full mt-10"
+      className="w-full h-full mt-10 flex flex-col items-center"
     >
       <div
-        className={`grid grid-cols-2 grid-rows-2 max-sm:gap-5 sm:flex justify-between w-[90%]`}
+        className={`grid grid-cols-2 grid-rows-2 max-sm:gap-5 sm:flex justify-between w-[90%] ${show && "blur-xl brightness-50"}`}
       >
         <StatsCard header="Active classrooms" count={7} update="+2 last week" />
         <StatsCard header="Active classrooms" count={7} update="+2 last week" />
@@ -45,7 +47,7 @@ const IndividualClassroomComponent = () => {
         <StatsCard header="Active classrooms" count={7} update="+2 last week" />
       </div>
 
-      <div className="w-full flex items-center max-md:hidden gap-10 relative mt-10">
+      <div className={`w-full flex items-center max-md:hidden gap-10 relative mt-10 ${show && "blur-xl brightness-50"}`}>
         {sections.map((setting, index) => {
           return (
             <div

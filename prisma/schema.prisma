@@ -55,6 +55,21 @@ model Classroom {
   tutor Tutor @relation(fields: [tutorId], references: [id])
   tutorId String
   students Student[]
+  sessions Session[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt @default(now())
+}
+
+
+model Session {
+  id String @id @unique @default(uuid())
+  name String
+  subject String
+  description String
+  classroomId String
+  classroom Classroom @relation(fields: [classroomId], references: [id])
+  duration Int
+  attendance Int?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt @default(now())
 }

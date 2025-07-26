@@ -2,7 +2,7 @@
 import * as motion from "motion/react-client"
 import React from "react";
 
-const Students = () => {
+const Leaderboard = () => {
   return (
     <motion.section initial={{ x: +100, opacity: 0 }}
       animate={{
@@ -17,17 +17,17 @@ const Students = () => {
         <thead className="w-full text-xs text-secondaryText/90">
           <tr>
             <th scope="col" className="px-6 py-4 text-start">
-              Students
+              Leaderboard
             </th>
             <th scope="col" className="px-6 py-4 text-center">
-              Session
+              Sessions Taken
             </th>
             <th scope="col" className="px-6 py-4 text-center">
-              Tests
+              Tests Given
             </th>
 
             <th scope="col" className="px-6 py-4 text-center">
-              Assignments
+              Assignments Submitted
             </th>
             <th scope="col" className="px-6 py-4 text-center">
               Avg Marks
@@ -37,7 +37,7 @@ const Students = () => {
 
         <tbody className="uppercase text-primaryText/80 font-semibold text-sm">
           <tr className="cursor-pointer hover:bg-surface transition-colors duration-200 group">
-            <td className="px-6 py-4 text-start rounded-xl group-hover:text-primary group-hover:underline transition-all duration-200">
+            <td className="px-6 py-4 text-start rounded-xl text-amber group-hover:text-primary group-hover:underline transition-all duration-200">
               Harshit Raj Pandey
             </td>
             <td className="px-6 py-4 text-center">50</td>
@@ -47,7 +47,7 @@ const Students = () => {
           </tr>
 
           <tr className="cursor-pointer hover:bg-surface transition-colors duration-200 group">
-            <td className="px-6 py-4 text-start rounded-xl group-hover:text-primary group-hover:underline transition-all duration-200">
+            <td className="px-6 py-4 text-start rounded-xl text-gray-400 group-hover:text-primary group-hover:underline transition-all duration-200">
               Harshit Raj Pandey
             </td>
             <td className="px-6 py-4 text-center">50</td>
@@ -61,4 +61,4 @@ const Students = () => {
   );
 };
 
-export default Students;
+export default Leaderboard;
