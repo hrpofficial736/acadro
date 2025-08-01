@@ -10,11 +10,12 @@ import Notes from "./Notes";
 import Assignments from "./Assignments";
 import Leaderboard from "./Leaderboard";
 import { useWindowStore } from "@/stores/useWindowStore";
+import { SessionInterface } from "@/interfaces/session";
 
-const IndividualClassroomComponent = () => {
+const IndividualClassroomComponent = ({ sessions }: { sessions: SessionInterface[] }) => {
   const sections = [
     { name: "Students", component: <Students /> },
-    { name: "Sessions", component: <Sessions /> },
+    { name: "Sessions", component: <Sessions sessions={sessions} /> },
     { name: "Tests", component: <Tests /> },
     { name: "Notes", component: <Notes /> },
     { name: "Assignments", component: <Assignments /> },
@@ -36,7 +37,7 @@ const IndividualClassroomComponent = () => {
         duration: 0.2,
         type: "tween",
       }}
-      className="w-full h-full mt-10 flex flex-col items-center"
+      className="w-full h-full mt-10 flex flex-col items-center border"
     >
       <div
         className={`grid grid-cols-2 grid-rows-2 max-sm:gap-5 sm:flex justify-between w-[90%] ${show && "blur-xl brightness-50"}`}

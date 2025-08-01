@@ -68,6 +68,8 @@ model Session {
   description String
   classroomId String
   classroom Classroom @relation(fields: [classroomId], references: [id])
+  date DateTime
+  time String
   duration Int
   attendance Int?
   createdAt DateTime @default(now())

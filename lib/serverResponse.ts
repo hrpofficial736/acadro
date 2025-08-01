@@ -1,4 +1,4 @@
-type ServerResponse = {
+export type ServerResponse = {
   status: number;
   success: boolean;
   message: string;

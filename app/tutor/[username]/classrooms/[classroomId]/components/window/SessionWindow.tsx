@@ -5,49 +5,71 @@ import Window from "@/components/window/Window";
 import { useWindowStore } from "@/stores/useWindowStore";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
-import createSessionAction from "../../actions/createSessionAction";
 import { useParams } from "next/navigation";
 import { PrimaryButton } from "@/components/buttons/PrimaryButton";
+import { createSessionAction, updateSessionAction } from "../../actions/sessionActions";
+import { ServerResponse } from "@/lib/serverResponse";
 
 export type CreateSessionFormProps = {
   name: string;
   subject: string;
   description: string;
+  date: Date;
+  time: string;
   duration: number;
 };
 
-const SessionWindow = () => {
-  const { show, toggleShow, current } = useWindowStore();
+const SessionWindow = ({
+  header,
+  create,
+  sessionId
+}: {
+  header: string;
+  create: boolean;
+  sessionId?: string;
+}) => {
+  const { toggleShow, current } = useWindowStore();
   const { classroomId } = useParams();
   const [loading, setLoading] = useState<boolean>(false);
   const [formData, setFormData] = useState<CreateSessionFormProps>({
     name: "",
     subject: "",
     description: "",
+    date: new Date(),
+    time: "",
     duration: 0,
   });
 
   const handleFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 
-    const newValue =
-      name === "duration"
-        ? Number.parseInt(value)
-        : value;
+    let formattedValue: string | number | Date;
+    switch (name) {
+      case "duration":
+        formattedValue = Number.parseInt(value);
+        break;
+      case "date":
+        formattedValue = new Date(value);
+        break;
+      default:
+        formattedValue = value;
+        break;
+    }
 
     setFormData((prevData) => ({
       ...prevData,
-      [name]: newValue,
+      [name]: formattedValue,
     }));
   };
 
   const handleFormValidation = () => {
-    const { name, subject, description, duration } = formData;
+    const { name, subject, description, duration, time } = formData;
     if (
       name.length === 0 ||
       subject.length === 0 ||
       description.length === 0 ||
-      duration === 0
+      duration === 0 ||
+      time.length === 0
     )
       return false;
 
@@ -66,70 +88,95 @@ const SessionWindow = () => {
       return;
     }
 
-    const responseFromServerAction = await createSessionAction({
+    let responseFromServerAction: ServerResponse;
+    if (create) {
+      responseFromServerAction = await createSessionAction({
       ...formData,
       classroomId: classroomId as string,
     });
+    } else {
+      responseFromServerAction = await updateSessionAction({
+      ...formData,
+      classroomId: classroomId as string,
+    }, sessionId!);
+    }
 
     if (!responseFromServerAction.success) {
       toast.error(
-        `Error creating the classroom: ${responseFromServerAction.message}`
+        `Error ${create ? "creating" : "updating"} the session: ${responseFromServerAction.message}`
       );
       setLoading(false);
       return;
     }
-    toast.success(`Classroom ${formData.name} created successfully!`);
+    toast.success(`Session ${formData.name} ${create ? "created" : "updated"} successfully!`);
     setLoading(false);
-    toggleShow("create-classroom");
+    toggleShow(create ? "create-session" : "update-session");
   };
   return (
-    <>
-      {show && (
-        <Window index={current} header={"Create a session"}>
-          <div className="w-full flex flex-col gap-5 p-2">
-            <CustomTextField
-              type="text"
-              name="name"
-              label="Name of your session"
-              onChanged={handleFormChange}
-              value={formData.name}
-              placeholder="Enter the session name"
-            />
-            <CustomTextField
-              type="text"
-              name="subject"
-              label="Subject Name"
-              onChanged={handleFormChange}
-              value={formData.subject}
-              placeholder="Enter the subject name"
-            />
-            <CustomTextField
-              type="text"
-              name="description"
-              label="Session Description"
-              onChanged={handleFormChange}
-              value={formData.description}
-              placeholder="Describe your classroom in one line..."
-            />
-            <CustomTextField
-              type="number"
-              name="duration"
-              label="Duration of this classroom (in minutes)"
-              onChanged={handleFormChange}
-              value={formData.duration.toString()}
-              placeholder="e.g. 10"
-            />
+    <Window index={current} header={header}>
+      <div className="w-full flex flex-col gap-5 p-2">
+        <CustomTextField
+          type="text"
+          name="name"
+          label="Name of your session"
+          onChanged={handleFormChange}
+          value={formData.name}
+          placeholder="Enter the session name"
+        />
+        <CustomTextField
+          type="text"
+          name="subject"
+          label="Subject Name"
+          onChanged={handleFormChange}
+          value={formData.subject}
+          placeholder="Enter the subject name"
+        />
+        <CustomTextField
+          type="text"
+          name="description"
+          label="Session Description"
+          onChanged={handleFormChange}
+          value={formData.description}
+          placeholder="Describe your classroom in one line..."
+        />
 
-            <PrimaryButton
-              text="Create Session"
-              showLoading={loading}
-              onPressed={handleFormSubmission}
-              className="rounded-lg min-w-[400px] mt-5 self-center"
-            />
-          </div>
-        </Window>
-      )}
-    </>
+        {/* Date */}
+
+        <CustomTextField
+          type="date"
+          name="date"
+          label="Session Date"
+          onChanged={handleFormChange}
+          value={formData.date}
+          placeholder=""
+        />
+
+        {/* Time */}
+        <CustomTextField
+          type="time"
+          name="time"
+          label="Session Timing"
+          onChanged={handleFormChange}
+          value={formData.time}
+          placeholder="e.g. 10"
+        />
+        <CustomTextField
+          type="number"
+          name="duration"
+          label="Duration of this session (in minutes)"
+          onChanged={handleFormChange}
+          value={formData.duration.toString()}
+          placeholder="e.g. 10"
+        />
+
+        <PrimaryButton
+          text={`${create ? "Create" : "Update"} Session`}
+          showLoading={loading}
+          onPressed={handleFormSubmission}
+          className="rounded-lg min-w-[400px] mt-5 self-center"
+        />
+      </div>
+    </Window>
   );
 };
 

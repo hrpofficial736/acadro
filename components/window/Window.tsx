@@ -19,7 +19,7 @@ const Window = ({
 }) => {
   const { show, toggleShow } = useWindowStore();
   return (
-    <AnimatePresence>
+    <AnimatePresence mode="wait">
       {show && (
         <motion.div
           initial={{
@@ -42,7 +42,7 @@ const Window = ({
         >
           {/* Cross icon */}
           <div className="flex justify-between w-full">
-            <p className="text-xs font-semibold text-secondaryText">{header}</p>
+            <p className="text-sm font-semibold text-secondaryText">{header}</p>
             <div
               onClick={() => toggleShow(index)}
               className="bg-error p-2 text-primaryText rounded-md self-end cursor-pointer font-bold"

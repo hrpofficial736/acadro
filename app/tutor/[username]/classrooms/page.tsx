@@ -1,7 +1,19 @@
 import { prisma } from "@/lib/prismaClient";
 import ClassroomComponent from "./components/ClassroomComponent";
 
-export default async function ClassroomsPage() {
-  const classrooms = await prisma.classroom.findMany();
+
+type PageProps = {
+  params: {
+    tutorId: string
+  }
+}
+
+export default async function ClassroomsPage({ params }: PageProps) {
+  const classrooms = await prisma.classroom.findMany({
+    where: {
+      tutorId: params.tutorId
+    }
+  });
+  
   return <ClassroomComponent classrooms={classrooms} />;
 }
